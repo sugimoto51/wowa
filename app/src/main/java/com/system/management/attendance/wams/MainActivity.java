@@ -406,27 +406,31 @@ public class MainActivity extends AppCompatActivity {
                 int date = rnd.nextInt(30);
 
                 AttendanceData data = fm.readAttendanceFile(2017, 12, date);
-                data.setStartHour("8");
-                data.setStartMinute("0");
-                data.setEndHour("23");
-                data.setEndMinute("30");
+                if (data != null) {
+                    data.setStartHour("8");
+                    data.setStartMinute("0");
+                    data.setEndHour("23");
+                    data.setEndMinute("30");
 
-                data.setAttendanceTimeNum("3");
-                data.setBreakTimeNum("3");
+                    data.setAttendanceTimeNum("3");
+                    data.setBreakTimeNum("3");
 
-                int result = fm.updateAttendanceFile(2017, 12, data);
-                if (result == FileManager.FILE_SUCCESS) {
-                    AttendanceData[] datas = fm.readAttendanceFile(2017, 12);
-                    for (int i = 0; i < datas.length; i++ ) {
-                        Log.d(TAG, "data : " + datas[i].getDate() + "," + datas[i].getDayOfWeek() + "," +
-                                datas[i].getSituation() + "," + datas[i].getNote() + "," + datas[i].getStartHour() +
-                                "," + datas[i].getStartMinute() + "," + datas[i].getEndHour() + "," +
-                                datas[i].getEndMinute() + "," + datas[i].getAttendanceTimeNum() + "," +
-                                datas[i].getBreakTimeNum());
+                    int result = fm.updateAttendanceFile(2017, 12, data);
+                    if (result == FileManager.FILE_SUCCESS) {
+                        AttendanceData[] datas = fm.readAttendanceFile(2017, 12);
+                        for (int i = 0; i < datas.length; i++) {
+                            Log.d(TAG, "data : " + datas[i].getDate() + "," + datas[i].getDayOfWeek() + "," +
+                                    datas[i].getSituation() + "," + datas[i].getNote() + "," + datas[i].getStartHour() +
+                                    "," + datas[i].getStartMinute() + "," + datas[i].getEndHour() + "," +
+                                    datas[i].getEndMinute() + "," + datas[i].getAttendanceTimeNum() + "," +
+                                    datas[i].getBreakTimeNum());
+                        }
+                        Toast.makeText(getApplicationContext(), "Success 2017.12." + date, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(getApplicationContext(), "Success 2017.12." + date, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Create data for 2017.12", Toast.LENGTH_SHORT).show();
                 }
             }
         });

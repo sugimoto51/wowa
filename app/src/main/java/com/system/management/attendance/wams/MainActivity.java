@@ -1,6 +1,7 @@
 package com.system.management.attendance.wams;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -432,6 +433,14 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Create data for 2017.12", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        final Intent intent = new Intent(this, SettingsActivity.class);
+        findViewById(R.id.buttonToSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(intent);
             }
         });
     }
